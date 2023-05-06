@@ -1,0 +1,81 @@
+import casa.*
+import cosas.*
+
+
+describe "test casaDePepeYJulian"{
+	
+	test "comprar cosas"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		assert.equals([heladera, cama], casaDePepeYJulian.cosas())
+	}
+	test "cantidad De Cosas Compradas"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		assert.equals(2, casaDePepeYJulian.cantidadDeCosasCompradas())
+	}
+	test "tiene comida- prueba con y sin comida comprada"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		assert.equals(false, casaDePepeYJulian.tieneComida())
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.equals(true, casaDePepeYJulian.tieneComida())
+	}
+	test "viene de equiparse  "{
+		
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.equals(false, casaDePepeYJulian.vieneDeEquiparse())
+	}
+	test "es derrochona: indica si el importe total de las cosas compradas es de 90000 pesos o más."{
+		
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.equals(false, casaDePepeYJulian.esDerrochona())
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(heladera)
+		assert.equals(true, casaDePepeYJulian.esDerrochona())
+	}
+	test "compraMasCara: retorna la cosa comprada de mayor valor"{
+		
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(heladera)
+		assert.equals(heladera, casaDePepeYJulian.compraMasCara())
+	}
+	test "electrodomésticosComprados:cosas compradas que son electrodomésticos"{
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.equals([plancha, heladera], casaDePepeYJulian.electrodomesticosComprados())
+	}
+	test "mala epoca: indica si todo lo comprado es comida"{
+		casaDePepeYJulian.comprar(paqueteDeFideos)
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.equals(true, casaDePepeYJulian.malaEpoca())
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(cama)
+		assert.equals(false, casaDePepeYJulian.malaEpoca())
+	}
+	test "que falta comprar: lista de cosas no compradas"{
+		const otrasCosas =[cama, heladera, plancha]
+		
+		casaDePepeYJulian.comprar(paqueteDeFideos)
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		casaDePepeYJulian.comprar(plancha)
+		assert.equals(#{cama,heladera}, casaDePepeYJulian.queFaltaComprar(otrasCosas))
+	}
+	test "falta comida: indica si se compro menos de 2 comidas"{
+		casaDePepeYJulian.comprar(paqueteDeFideos)
+		casaDePepeYJulian.comprar(cama)
+		assert.equals(true, casaDePepeYJulian.faltaComida())
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.equals(false, casaDePepeYJulian.faltaComida())
+	}
+	
+	
+	
+	
+	
+	
+}

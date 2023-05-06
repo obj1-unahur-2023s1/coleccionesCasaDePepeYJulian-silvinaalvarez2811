@@ -1,6 +1,4 @@
-// Como ya sabemos crear objetos y definir algunos métodos simples, 
-// algunos los tenemos parcialmente definidos. Completar todo los demás
-// para satisfacer lo que pide el enunciado.
+
 
 object heladera {
 	method precio() { return 200000 }
