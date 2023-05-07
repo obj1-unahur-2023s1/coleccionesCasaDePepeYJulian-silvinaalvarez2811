@@ -1,0 +1,39 @@
+import casa.*
+import cosas.*
+
+
+describe "test de cosas agregadas" {
+
+	test "milanesas"{
+		assert.equals (2600, milanesas.precio())
+		assert.equals (true, milanesas.esComida())
+		assert.equals (false, milanesas.esElectrodomestico())
+	}
+	test "salsa de tomates"{
+		assert.equals (900, salsaDeTomates.precio())
+		assert.equals (true, salsaDeTomates.esComida())
+		assert.equals (false, salsaDeTomates.esElectrodomestico())
+	}
+	test "microondas"{
+		assert.equals (42000, microondas.precio())
+		assert.equals (false, microondas.esComida())
+		assert.equals (true, microondas.esElectrodomestico())
+	}
+	test "cebollas"{
+		assert.equals (250, cebollas.precio())
+		assert.equals (true, cebollas.esComida())
+		assert.equals (false, cebollas.esElectrodomestico())
+	}
+	test "compu"{
+		assert.equals (240000, compu.precio())
+		assert.equals (false, compu.esComida())
+		assert.equals (true, compu.esElectrodomestico())
+	}
+	test "packComida"{
+		packComida.agregarPlato(milanesas)
+		packComida.agregarAderezo(salsaDeTomates)
+		assert.equals (3500, packComida.precio())
+		assert.equals (true,packComida.esComida())
+		assert.equals (false, packComida.esElectrodomestico())
+	}
+}

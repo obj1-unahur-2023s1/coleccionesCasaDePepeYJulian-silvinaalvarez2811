@@ -73,9 +73,4 @@ describe "test casaDePepeYJulian"{
 		assert.equals(false, casaDePepeYJulian.faltaComida())
 	}
 	
-	
-	
-	
-	
-	
 }

@@ -1,0 +1,56 @@
+import casa.*
+import cosas.*
+
+describe "test cuentas bancarias"{
+	
+	test "cuenta corriente"{
+		casaDePepeYJulian.usarCuentaDeBanco(cuentaCorriente)
+		cuentaCorriente.depositar(100000)
+		assert.equals(100000, cuentaCorriente.saldo())
+		casaDePepeYJulian.comprar(microondas)
+		assert.equals(58000, cuentaCorriente.saldo())
+		casaDePepeYJulian.gastar(1000)
+		assert.equals(57000, cuentaCorriente.saldo())
+		assert.equals(57000, casaDePepeYJulian.dineroDisponible())
+	}
+	test "cuenta con gastos"{
+		casaDePepeYJulian.usarCuentaDeBanco(cuentaConGastos)
+		cuentaConGastos.depositar(100200)
+		assert.equals(100000, cuentaConGastos.saldo())	
+		cuentaConGastos.extraer(5000)	
+		assert.equals(94800, cuentaConGastos.saldo())
+		cuentaConGastos.extraer(20000)	
+		assert.equals(74400, cuentaConGastos.saldo())
+		casaDePepeYJulian.comprar(microondas)
+		assert.equals(31560, cuentaConGastos.saldo())	
+	}
+	test "cuenta combinada, varias pruebas depositando"{
+		casaDePepeYJulian.usarCuentaDeBanco(cuentaCombinada)
+		cuentaCorriente.depositar(30000)
+		cuentaConGastos.depositar(2000200)
+		cuentaCombinada.esCuentaPrimaria(cuentaCorriente)
+		cuentaCombinada.esCuentaSecundaria(cuentaConGastos)
+		assert.equals(2030000, cuentaCombinada.saldo())	
+		cuentaCombinada.depositar(10000)
+		assert.equals(2040000, cuentaCombinada.saldo())	
+		assert.equals(40000, cuentaCorriente.saldo())
+		
+	}
+	test "cuenta combinada,extracciones"{
+		//extrae todo de la principal y el resto de la secundaria//
+		
+		casaDePepeYJulian.usarCuentaDeBanco(cuentaCombinada)
+		cuentaCorriente.depositar(30000)
+		cuentaConGastos.depositar(2000200)
+		cuentaCombinada.esCuentaPrimaria(cuentaCorriente)
+		cuentaCombinada.esCuentaSecundaria(cuentaConGastos)
+		assert.equals(2030000, cuentaCombinada.saldo())	
+		cuentaCombinada.extraer(100000)
+		assert.equals(0, cuentaCorriente.saldo())	
+		assert.equals(1928600, cuentaConGastos.saldo())	
+			
+	}
+}
+
+
+	
